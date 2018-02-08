@@ -19,9 +19,15 @@ buildscript {
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
-        classpath "de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.1"
+
+        classpath 'net.saliman:gradle-cobertura-plugin:2.5.0'
+        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2"
     }
 }
+
+
+apply plugin: "com.github.kt3k.coveralls"
+
 
 def modulePrefix = 'attachable'
 
@@ -36,6 +42,10 @@ def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
 apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
+
+def bintrayRepositoryUrl = "https://api.bintray.com/maven/mariodavid/cuba-components/cuba-component-attachable/;publish=1"
+
+
 cuba {
     artifact {
         group = 'de.diedavids.cuba.attachable'
@@ -45,6 +55,16 @@ cuba {
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
     }
+    uploadRepository {
+        if (cuba.artifact.isSnapshot) {
+            url = System.properties['uploadRepositorySnapshot'] ?: System.env.UPLOAD_REPOSITORY_SNAPSHOT
+        } else {
+            url = System.properties['uploadRepositoryRelease'] ?: System.env.UPLOAD_REPOSITORY_RELEASE ?: bintrayRepositoryUrl
+        }
+
+        user = System.properties['uploadRepositoryUsername'] ?: System.env.UPLOAD_REPOSITORY_USERNAME
+        password = System.properties['uploadRepositoryPassword'] ?:System.env.UPLOAD_REPOSITORY_PASSWORD
+    }
     ide {
         vcs = 'Git'
     }
@@ -52,10 +72,36 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.1")
 
 }
 
 def hsql = 'org.hsqldb:hsqldb:2.2.9'
+
+
+allprojects {
+    apply plugin: 'net.saliman.cobertura'
+}
+
+
+def files = subprojects
+        .findAll{ !it.name.toLowerCase().contains('theme') }
+        .collect { new File(it.projectDir, '/build/cobertura/cobertura.ser')}
+def sourceDirs = subprojects
+        .findAll{ !it.name.toLowerCase().contains('theme') }
+        .collect { new File(it.projectDir, '/src')}
+
+cobertura {
+    coverageFormats = ['html', 'xml']
+    coverageMergeDatafiles = files
+    coverageCheckTotalBranchRate = 0
+    coverageCheckTotalLineRate = 0
+    coverageCheckHaltOnFailure = true
+    coverageSourceDirs = sourceDirs
+//    coverageCheckLineRate = 1
+    coverageCheckRegexes = [[regex: '.*\\$.*', branchRate: 0, lineRate: 0]]
+
+}
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
@@ -65,6 +111,11 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 
     dependencies {
         testCompile('junit:junit:4.12')
+
+
+        testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
+        testCompile('org.springframework:spring-test:4.3.1.RELEASE')
+        testRuntime "cglib:cglib-nodep:3.2.4"
     }
 
     task sourceJar(type: Jar) {
@@ -79,6 +130,40 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'groovy')
+
+    apply plugin: 'net.saliman.cobertura'
+    apply plugin: 'codenarc'
+
+
+    codenarc {
+        toolVersion = "0.24"
+        ignoreFailures = false
+        reportFormat = 'html'
+        reportsDir = new File("./build/reports/codenarc")
+    }
+
+    codenarcMain {
+        configFile = rootProject.file("config/codenarc/rulesMain.groovy")
+    }
+    codenarcTest {
+        configFile = rootProject.file("config/codenarc/rulesTests.groovy")
+    }
+
+
+    cobertura {
+        coverageFormats = ['html', 'xml']
+        coverageIgnoreTrivial = true
+        coverageIgnores = ['org.slf4j.Logger.*']
+        coverageReportDir = new File("$buildDir/reports/cobertura")
+
+        coverageExcludes = [
+                '.*Generator',
+                '.*Enum'
+        ]
+    }
+
+    test.finalizedBy(project.tasks.cobertura)
+    test.finalizedBy(project.tasks.coberturaCheck)
 
     sourceSets {
         main { groovy { srcDirs = ["src"] } }
@@ -228,3 +313,8 @@ task wrapper(type: Wrapper) {
 }
 
 apply from: 'extra.gradle'
+
+
+clean {
+    delete = ['build/libs', 'build/tmp']
+}
