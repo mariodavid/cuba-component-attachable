@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
     <include file="de/diedavids/cuba/attachable/screens.xml"/>
-    <screen id="ddca$Attachement.browse"
-            template="de/diedavids/cuba/attachable/web/attachement/attachement-browse.xml"/>
-    <screen id="ddca$Attachement.edit"
-            template="de/diedavids/cuba/attachable/web/attachement/attachement-edit.xml"/>
+    <screen id="ddca$Attachment.browse"
+            template="de/diedavids/cuba/attachable/web/attachment/attachment-browse.xml"/>
+    <screen id="ddca$Attachment.edit"
+            template="de/diedavids/cuba/attachable/web/attachment/attachment-edit.xml"/>
 </screen-config>

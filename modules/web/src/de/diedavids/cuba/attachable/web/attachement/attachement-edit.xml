@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://editorCaption"
-        class="de.diedavids.cuba.attachable.web.attachement.AttachementEdit"
-        datasource="attachementDs"
+        class="de.diedavids.cuba.attachable.web.attachment.AttachmentEdit"
+        datasource="attachmentDs"
         focusComponent="fieldGroup"
-        messagesPack="de.diedavids.cuba.attachable.web.attachement">
+        messagesPack="de.diedavids.cuba.attachable.web.attachment">
     <dsContext>
-        <datasource id="attachementDs"
-                    class="de.diedavids.cuba.attachable.entity.Attachement"
-                    view="attachement-view"/>
+        <datasource id="attachmentDs"
+                    class="de.diedavids.cuba.attachable.entity.Attachment"
+                    view="attachment-view"/>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
             spacing="true">
         <fieldGroup id="fieldGroup"
-                    datasource="attachementDs">
+                    datasource="attachmentDs">
             <column width="250px">
                 <field property="name"/>
                 <field property="file"/>

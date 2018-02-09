@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://browseCaption"
-        class="de.diedavids.cuba.attachable.web.attachement.AttachementBrowse"
-        focusComponent="attachementsTable"
-        lookupComponent="attachementsTable"
-        messagesPack="de.diedavids.cuba.attachable.web.attachement">
+        class="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowse"
+        focusComponent="attachmentsTable"
+        lookupComponent="attachmentsTable"
+        messagesPack="de.diedavids.cuba.attachable.web.attachment">
     <dsContext>
-        <groupDatasource id="attachementsDs"
-                         class="de.diedavids.cuba.attachable.entity.Attachement"
-                         view="attachement-view">
+        <groupDatasource id="attachmentsDs"
+                         class="de.diedavids.cuba.attachable.entity.Attachment"
+                         view="attachment-view">
             <query>
-                <![CDATA[select e from ddca$Attachement e]]>
+                <![CDATA[select e from ddca$Attachment e]]>
             </query>
         </groupDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="attachementsTable"
+    <layout expand="attachmentsTable"
             spacing="true">
         <filter id="filter"
-                applyTo="attachementsTable"
-                datasource="attachementsDs">
+                applyTo="attachmentsTable"
+                datasource="attachmentsDs">
             <properties include=".*"/>
         </filter>
-        <groupTable id="attachementsTable"
+        <groupTable id="attachmentsTable"
                     width="100%">
             <actions>
                 <action id="create"/>
@@ -35,16 +35,16 @@
                 <column id="file"/>
                 <column id="attachable"/>
             </columns>
-            <rows datasource="attachementsDs"/>
+            <rows datasource="attachmentsDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn"
-                        action="attachementsTable.create"/>
+                        action="attachmentsTable.create"/>
                 <button id="editBtn"
-                        action="attachementsTable.edit"/>
+                        action="attachmentsTable.edit"/>
                 <button id="removeBtn"
-                        action="attachementsTable.remove"/>
+                        action="attachmentsTable.remove"/>
             </buttonsPanel>
         </groupTable>
     </layout>

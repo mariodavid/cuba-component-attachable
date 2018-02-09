@@ -18,8 +18,8 @@ import de.diedavids.cuba.entitysoftreference.EntitySoftReferenceDatatype;
 
 @NamePattern("%s|name")
 @Table(name = "DDCA_ATTACHEMENT")
-@Entity(name = "ddca$Attachement")
-public class Attachement extends StandardEntity {
+@Entity(name = "ddca$Attachment")
+public class Attachment extends StandardEntity {
     private static final long serialVersionUID = -5689061909136000090L;
 
 
