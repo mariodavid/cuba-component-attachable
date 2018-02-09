@@ -5,8 +5,4 @@
             template="de/diedavids/cuba/attachable/web/attachment/attachment-browse.xml"/>
     <screen id="ddca$Attachment.edit"
             template="de/diedavids/cuba/attachable/web/attachment/attachment-edit.xml"/>
-    <screen id="ddca$Customer.browse"
-            template="de/diedavids/cuba/attachable/web/customer/customer-browse.xml"/>
-    <screen id="ddca$Customer.edit"
-            template="de/diedavids/cuba/attachable/web/customer/customer-edit.xml"/>
 </screen-config>
