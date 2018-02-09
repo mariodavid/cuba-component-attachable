@@ -3,5 +3,6 @@
     <menu id="application-ddca"
           insertBefore="administration">
         <item screen="ddca$Attachment.browse"/>
+        <item screen="ddca$Customer.browse"/>
     </menu>
 </menu-config>

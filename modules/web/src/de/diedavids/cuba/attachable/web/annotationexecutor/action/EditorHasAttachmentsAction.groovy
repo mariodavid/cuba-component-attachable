@@ -1,4 +1,4 @@
-package de.diedavids.cuba.attachable.web.action
+package de.diedavids.cuba.attachable.web.annotationexecutor.action
 
 import com.haulmont.cuba.core.global.AppBeans
 import com.haulmont.cuba.gui.WindowManager
@@ -6,6 +6,7 @@ import com.haulmont.cuba.gui.components.AbstractAction
 import com.haulmont.cuba.gui.components.Action
 import com.haulmont.cuba.gui.components.Component
 import com.haulmont.cuba.gui.components.Window
+import de.diedavids.cuba.attachable.web.annotationexecutor.HasAttachmentsBean
 import groovy.transform.CompileStatic
 
 @CompileStatic

@@ -1,10 +1,11 @@
-package de.diedavids.cuba.attachable.web.action
+package de.diedavids.cuba.attachable.web.annotationexecutor
 
 import com.haulmont.cuba.gui.components.Button
 import com.haulmont.cuba.gui.components.Window
 import de.balvi.cuba.declarativecontrollers.web.annotationexecutor.editor.EditorAnnotationExecutor
 import de.balvi.cuba.declarativecontrollers.web.helper.ButtonsPanelHelper
 import de.diedavids.cuba.attachable.web.HasAttachments
+import de.diedavids.cuba.attachable.web.annotationexecutor.action.EditorHasAttachmentsAction
 import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
 

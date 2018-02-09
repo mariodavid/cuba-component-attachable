@@ -112,7 +112,6 @@ ruleset {
     SynchronizedOnThis { priority = 1 }
     SynchronizedReadObjectMethod { priority = 1 }
     SystemRunFinalizersOnExit { priority = 1 }
-    ThisReferenceEscapesConstructor { priority = 1 }
     ThreadGroup { priority = 1 }
     ThreadLocalNotStaticFinal { priority = 1 }
     ThreadYield { priority = 1 }
@@ -202,7 +201,6 @@ ruleset {
     UnnecessaryBooleanInstantiation { priority = 1 }
     UnnecessaryCallForLastElement { priority = 1 }
     UnnecessaryCallToSubstring { priority = 1 }
-    UnnecessaryCast { priority = 1 }
     UnnecessaryCatchBlock { priority = 1 }
     UnnecessaryCollectCall { priority = 1 }
     UnnecessaryCollectionCall { priority = 1 }

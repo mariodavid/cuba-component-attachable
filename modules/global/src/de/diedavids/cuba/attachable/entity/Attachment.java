@@ -35,19 +35,19 @@ public class Attachment extends StandardEntity {
     @Column(name = "ATTACHABLE", nullable = false)
     protected com.haulmont.cuba.core.entity.Entity attachable;
 
-    @OnDeleteInverse(DeletePolicy.DENY)
     @OnDelete(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FILE_ID")
     protected FileDescriptor file;
 
+    public com.haulmont.cuba.core.entity.Entity getAttachable() {
+        return attachable;
+    }
+
     public void setAttachable(com.haulmont.cuba.core.entity.Entity attachable) {
         this.attachable = attachable;
     }
 
-    public com.haulmont.cuba.core.entity.Entity getAttachable() {
-        return attachable;
-    }
 
 
     public void setName(String name) {

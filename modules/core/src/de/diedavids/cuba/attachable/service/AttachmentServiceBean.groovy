@@ -1,7 +1,7 @@
 package de.diedavids.cuba.attachable.service
 
+import com.haulmont.chile.core.model.MetaClass
 import com.haulmont.cuba.core.entity.Entity
-import com.haulmont.cuba.core.global.DataManager
 import com.haulmont.cuba.core.global.Metadata
 import de.diedavids.cuba.attachable.entity.Attachment
 import de.diedavids.cuba.entitysoftreference.SoftReferenceService
@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service
 import javax.inject.Inject
 
 @Service(AttachmentService.NAME)
-public class AttachmentServiceBean implements AttachmentService {
+class AttachmentServiceBean implements AttachmentService {
 
+    private static final String ATTACHABLE_COLUMN_NAME = 'attachable'
 
     @Inject
     SoftReferenceService softReferenceService
@@ -21,11 +22,14 @@ public class AttachmentServiceBean implements AttachmentService {
 
     @Override
     int countAttachments(Entity entity) {
+        softReferenceService.getEntitiesForSoftReference(
+                findMetaClass(Attachment),
+                entity,
+                ATTACHABLE_COLUMN_NAME
+        ).size()
+    }
 
-        def attachmentMetaClass = metadata.getClass(Attachment)
-
-        def result = softReferenceService.getEntitiesForSoftReference(attachmentMetaClass, entity, "attachable")
-
-        result.size()
+    private MetaClass findMetaClass(Class aClass) {
+        metadata.getClass(aClass)
     }
 }
