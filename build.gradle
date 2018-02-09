@@ -3,6 +3,7 @@ buildscript {
     ext.cubaVersion = '6.8.0'
     repositories {
         
+        mavenLocal()
         maven {
             url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
@@ -14,6 +15,10 @@ buildscript {
 
         maven {
             url  "https://dl.bintray.com/mariodavid/cuba-components"
+        }
+
+        maven {
+            url  "https://dl.bintray.com/balvi/cuba-components"
         }
         
     }
@@ -72,7 +77,8 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.1")
+    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.4.0")
+    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.1.1")
 
 }
 

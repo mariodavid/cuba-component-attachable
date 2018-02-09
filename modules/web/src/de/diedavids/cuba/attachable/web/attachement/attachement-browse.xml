@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="de.diedavids.cuba.attachable.web.attachement.AttachementBrowse"
+        focusComponent="attachementsTable"
+        lookupComponent="attachementsTable"
+        messagesPack="de.diedavids.cuba.attachable.web.attachement">
+    <dsContext>
+        <groupDatasource id="attachementsDs"
+                         class="de.diedavids.cuba.attachable.entity.Attachement"
+                         view="attachement-view">
+            <query>
+                <![CDATA[select e from ddca$Attachement e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="attachementsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="attachementsTable"
+                datasource="attachementsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="attachementsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="file"/>
+                <column id="attachable"/>
+            </columns>
+            <rows datasource="attachementsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="attachementsTable.create"/>
+                <button id="editBtn"
+                        action="attachementsTable.edit"/>
+                <button id="removeBtn"
+                        action="attachementsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

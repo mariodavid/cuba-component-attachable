@@ -1,1 +1,4 @@
-
+-- begin DDCA_ATTACHEMENT
+alter table DDCA_ATTACHEMENT add constraint FK_DDCA_ATTACHEMENT_FILE foreign key (FILE_ID) references SYS_FILE(ID)^
+create index IDX_DDCA_ATTACHEMENT_FILE on DDCA_ATTACHEMENT (FILE_ID)^
+-- end DDCA_ATTACHEMENT

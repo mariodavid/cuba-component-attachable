@@ -1,4 +1,3 @@
--- begin DDCA_ATTACHEMENT
 create table DDCA_ATTACHEMENT (
     ID varchar(36) not null,
     VERSION integer not null,
@@ -10,9 +9,7 @@ create table DDCA_ATTACHEMENT (
     DELETED_BY varchar(50),
     --
     NAME varchar(255) not null,
-    ATTACHABLE varchar(255) not null,
     FILE_ID varchar(36),
     --
     primary key (ID)
-)^
--- end DDCA_ATTACHEMENT
+);
