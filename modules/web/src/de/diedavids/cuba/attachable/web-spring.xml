@@ -15,4 +15,6 @@
             </map>
         </property>
     </bean>
+
+    <bean id="dbcdc_ButtonsPanelHelper" class="de.balvi.cuba.declarativecontrollers.web.helper.ButtonsPanelHelperBean" />
 </beans>
