@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://attachmentPreview"
+        class="de.diedavids.cuba.attachable.web.attachment.AttachmentPreview"
+        datasource="attachmentDs"
+        messagesPack="de.diedavids.cuba.attachable.web.attachment">
+    <dsContext>
+        <datasource id="attachmentDs"
+                    class="de.diedavids.cuba.attachable.entity.Attachment"
+                    view="attachment-view"/>
+    </dsContext>
+    <actions>
+        <action id="downloadAction"
+                caption="msg://actions.Download"
+                icon="font-icon:DOWNLOAD"
+                invoke="downloadFile"/>
+    </actions>
+    <dialogMode forceDialog="true"
+                width="1024"
+                height="800"
+                resizable="true"
+            />
+    <layout expand="attachmentPreviewViewer"
+            spacing="true">
+        <buttonsPanel>
+            <button id="download"
+                    action="downloadAction"/>
+        </buttonsPanel>
+        <embedded id="attachmentPreviewViewer"
+                  type="BROWSER"
+                  width="100%"/>
+    </layout>
+</window>

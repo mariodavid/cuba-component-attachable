@@ -10,11 +10,15 @@
                     class="de.diedavids.cuba.attachable.entity.Attachment"
                     view="attachment-view"/>
     </dsContext>
+    <dialogMode
+            width="75%"
+            height="75%"
+        />
     <layout expand="windowActions"
             spacing="true">
         <fieldGroup id="fieldGroup"
                     datasource="attachmentDs">
-            <column width="250px">
+            <column width="400px">
                 <field property="name"/>
                 <field property="file"/>
             </column>
