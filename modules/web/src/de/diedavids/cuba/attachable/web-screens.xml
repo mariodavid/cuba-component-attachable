@@ -7,8 +7,4 @@
             template="de/diedavids/cuba/attachable/web/attachment/attachment-edit.xml"/>
     <screen id="ddca$Attachment.preview"
             template="de/diedavids/cuba/attachable/web/attachment/attachment-preview.xml"/>
-    <screen id="ddca$Customer.browse"
-            template="de/diedavids/cuba/attachable/example/customer/customer-browse.xml"/>
-    <screen id="ddca$Customer.edit"
-            template="de/diedavids/cuba/attachable/example/customer/customer-edit.xml"/>
 </screen-config>

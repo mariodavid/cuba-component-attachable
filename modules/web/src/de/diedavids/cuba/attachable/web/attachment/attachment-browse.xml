@@ -8,8 +8,7 @@
     <dsContext>
         <collectionDatasource id="attachmentsDs"
                          class="de.diedavids.cuba.attachable.entity.Attachment"
-                         datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource"
-                         >
+                         datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource">
         </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
@@ -27,10 +26,10 @@
                 <action id="remove"/>
             </actions>
             <columns>
-                <column id="name"
+                <column id="name" />
+                <column id="file"
                         link="true"
                         linkInvoke="previewFile"
-                        maxTextLength="10"
                 />
                 <column id="createTs" />
             </columns>

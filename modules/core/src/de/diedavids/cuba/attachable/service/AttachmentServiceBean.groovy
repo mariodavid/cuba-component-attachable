@@ -17,24 +17,19 @@ class AttachmentServiceBean implements AttachmentService {
     @Inject
     SoftReferenceService softReferenceService
 
-    @Inject
-    Metadata metadata
-
     @Override
     int countAttachments(Entity entity) {
-        getAttachments(entity).size()
+        softReferenceService.countEntitiesForSoftReference(Attachment, entity, ATTACHABLE_COLUMN_NAME)
     }
 
     @Override
     Collection<Attachment> getAttachments(Entity entity) {
-        softReferenceService.getEntitiesForSoftReference(
-                findMetaClass(Attachment),
+        softReferenceService.loadEntitiesForSoftReference(
+                Attachment,
                 entity,
-                ATTACHABLE_COLUMN_NAME
+                ATTACHABLE_COLUMN_NAME,
+                'attachment-view'
         ) as Collection<Attachment>
     }
 
-    private MetaClass findMetaClass(Class aClass) {
-        metadata.getClass(aClass)
-    }
 }

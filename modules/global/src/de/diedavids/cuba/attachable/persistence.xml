@@ -4,6 +4,5 @@
     <persistence-unit name="cuba-component-attachable"
                       transaction-type="RESOURCE_LOCAL">
         <class>de.diedavids.cuba.attachable.entity.Attachment</class>
-        <class>de.diedavids.cuba.attachable.example.Customer</class>
     </persistence-unit>
 </persistence>
