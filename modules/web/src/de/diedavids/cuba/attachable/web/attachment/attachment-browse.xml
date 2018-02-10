@@ -33,7 +33,6 @@
             <columns>
                 <column id="name"/>
                 <column id="file"/>
-                <column id="attachable"/>
             </columns>
             <rows datasource="attachmentsDs"/>
             <rowsCount/>

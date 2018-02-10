@@ -17,7 +17,9 @@ import de.diedavids.cuba.entitysoftreference.EntitySoftReferenceConverter;
 import de.diedavids.cuba.entitysoftreference.EntitySoftReferenceDatatype;
 
 @NamePattern("%s|name")
-@Table(name = "DDCA_ATTACHEMENT")
+@Table(name = "DDCA_ATTACHEMENT", indexes = {
+    @Index(name = "IDX_DDCA_ATTACHMENT", columnList = "ATTACHABLE")
+})
 @Entity(name = "ddca$Attachment")
 public class Attachment extends StandardEntity {
     private static final long serialVersionUID = -5689061909136000090L;
@@ -47,6 +49,7 @@ public class Attachment extends StandardEntity {
     public void setAttachable(com.haulmont.cuba.core.entity.Entity attachable) {
         this.attachable = attachable;
     }
+
 
 
 
