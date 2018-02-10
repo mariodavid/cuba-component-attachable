@@ -10,7 +10,7 @@ import javax.inject.Named
 
 class AttachmentEdit extends AbstractEditor<Attachment> {
 
-    @Named("fieldGroup.name")
+    @Named('fieldGroup.name')
     TextField nameTextField
 
     @Inject
@@ -18,6 +18,12 @@ class AttachmentEdit extends AbstractEditor<Attachment> {
 
     @Override
     void init(Map<String, Object> params) {
-        attachmentDs.addItemPropertyChangeListener(new CreateNameFromNameItemPropertyChangeListener(nameTextField: nameTextField))
+        initNameExtractor()
+    }
+
+    private initNameExtractor() {
+        attachmentDs.addItemPropertyChangeListener(
+                new AttachmentNameExtractor(destination: nameTextField)
+        )
     }
 }

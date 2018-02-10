@@ -6,24 +6,20 @@
         lookupComponent="attachmentsTable"
         messagesPack="de.diedavids.cuba.attachable.web.attachment">
     <dsContext>
-        <groupDatasource id="attachmentsDs"
+        <collectionDatasource id="attachmentsDs"
                          class="de.diedavids.cuba.attachable.entity.Attachment"
-                         view="attachment-view">
-            <query>
-                <![CDATA[select e from ddca$Attachment e where e.attachable = :param$entity]]>
-            </query>
-        </groupDatasource>
+                         datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource"
+                         >
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="attachmentsTable"
             spacing="true">
-        <filter id="filter"
-                applyTo="attachmentsTable"
-                datasource="attachmentsDs">
-            <properties include=".*"/>
-        </filter>
-        <groupTable id="attachmentsTable"
+        <table id="attachmentsTable"
+               presentations="false"
+               settingsEnabled="false"
+               columnControlVisible="false"
                     width="100%">
             <actions>
                 <action id="create"/>
@@ -31,12 +27,12 @@
                 <action id="remove"/>
             </actions>
             <columns>
-                <column id="name"/>
-                <column id="file"
+                <column id="name"
                         link="true"
                         linkInvoke="previewFile"
                         maxTextLength="10"
                 />
+                <column id="createTs" />
             </columns>
             <rows datasource="attachmentsDs"/>
             <rowsCount/>
@@ -53,6 +49,6 @@
                 <button id="previewBtn"
                         action="attachmentsTable.preview"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
     </layout>
 </window>

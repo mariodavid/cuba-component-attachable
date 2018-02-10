@@ -22,11 +22,16 @@ class AttachmentServiceBean implements AttachmentService {
 
     @Override
     int countAttachments(Entity entity) {
+        getAttachments(entity).size()
+    }
+
+    @Override
+    Collection<Attachment> getAttachments(Entity entity) {
         softReferenceService.getEntitiesForSoftReference(
                 findMetaClass(Attachment),
                 entity,
                 ATTACHABLE_COLUMN_NAME
-        ).size()
+        ) as Collection<Attachment>
     }
 
     private MetaClass findMetaClass(Class aClass) {
