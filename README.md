@@ -13,9 +13,9 @@ Just add `@WithAttachments` on the browse screen of your entity and the rest wil
 ![1-browse-with-attachments](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/1-browse-with-attachments.png)
 
 
-## Attachments
+## Usage
 
-To add attachments to your entity, you have to add the following annotation to your Browse / Edit screen controller:
+To add attachments to your entity, you have to add the following annotation to your browse / edit screen controller:
 
 ```
 @WithAttachments(listComponent = "customersTable")
@@ -24,15 +24,46 @@ public class CustomerBrowse extends AnnotatableAbstractLookup {
 ```
 
 For the `@WithAttachments` annotation you need to define the list component on which it should add the attachments button.
-Normally this is the `id` of the Table you defined in your browse screen.
+Normally this is the `id` of the table you defined in your browse screen.
 
-NOTE: to make the Annotation work, you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
+This annotation will create a button in the buttonsPanel of the table and add the Attachments button after the default CUBA buttons.
+
+The `@WithAttachments` annotations can be customized through the following attributes:
+
+* String listComponent() - the id of the list component / table where the button will be added - REQUIRED
+* String buttonId() - the id of the newly created button that will be created ("attachmentBtn" by default)
+* String buttonsPanel() - the id of the buttons panel where the new button will be added ("buttonsPanel" by default)
+
+
+### Example usage
+To see this application component in action, check out this example: [cuba-example-using-attachable](https://github.com/mariodavid/cuba-example-using-attachable).
+
+
+### Attachment list
+
+The attachment button will show all attachments that have been added to a particular selected entity.
+It allows to add, edit & remove attachments to this entity.
+![2-attachments-list](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/2-attachments-list.png)
+
+### Attachment preview
+Furthermore it gives the user the option to preview the attachment directly in the brower or download the attachment.
+
+![3-attachment-preview](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/3-attachment-preview.png)
+
+
+### Configuration options
+
+The application components adds the following application properties, that can be changed in the corresponding screen (`Administration > Application Properties):
+
+* `attachable.updateAttachmentCounterOnSelect` - whether or not a counter of attachments should be displayed after a particular entity is selected in the table
+
+##### NOTE: Dependency: declarative-controllers
+to make the Annotation work, you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
 This superclass is part of the app-component: [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers),
 which is a requirement for this app component.
 
 Technically it is not required to directly add the dependency to this app component, since `attachable` already has a dependency on it.
 However: since you directly depend on the app component (since you have to extend `AnnotatableAbstractLookup`), it is a best practice, to explicitly declare the dependency to it.
-
 
 ## Installation
 
@@ -72,7 +103,3 @@ Add custom application component to your project:
 
 3. install the compatible version of [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers) as another dependecy (see Table from 2. for version compatability).
 
-![2-attachments-list](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/2-attachments-list.png)
-
-
-![3-attachment-preview](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/3-attachment-preview.png)
