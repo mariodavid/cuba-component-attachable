@@ -46,10 +46,11 @@ It allows to add, edit & remove attachments to this entity.
 ![2-attachments-list](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/2-attachments-list.png)
 
 ### Attachment preview
-Furthermore it gives the user the option to preview the attachment directly in the brower or download the attachment.
-
+Furthermore it gives the user the option to preview the attachment directly in the browser or download the attachment.
+ 
 ![3-attachment-preview](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/3-attachment-preview.png)
 
+The ability to do the preview depends on the attachment type and the browser capabilities.
 
 ### Configuration options
 
