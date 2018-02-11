@@ -30,9 +30,9 @@ This annotation will create a button in the buttonsPanel of the table and add th
 
 The `@WithAttachments` annotations can be customized through the following attributes:
 
-* String listComponent() - the id of the list component / table where the button will be added - REQUIRED
-* String buttonId() - the id of the newly created button that will be created ("attachmentBtn" by default)
-* String buttonsPanel() - the id of the buttons panel where the new button will be added ("buttonsPanel" by default)
+* `String listComponent` - the id of the list component / table where the button will be added - REQUIRED
+* `String buttonId` - the id of the newly created button that will be created ("attachmentBtn" by default)
+* `String buttonsPanel` - the id of the buttons panel where the new button will be added ("buttonsPanel" by default)
 
 
 ### Example usage
@@ -57,15 +57,21 @@ The application components adds the following application properties, that can b
 
 * `attachable.updateAttachmentCounterOnSelect` - whether or not a counter of attachments should be displayed after a particular entity is selected in the table
 
-##### NOTE: Dependency: declarative-controllers
-to make the Annotation work, you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
-This superclass is part of the app-component: [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers),
-which is a requirement for this app component.
-
-Technically it is not required to directly add the dependency to this app component, since `attachable` already has a dependency on it.
-However: since you directly depend on the app component (since you have to extend `AnnotatableAbstractLookup`), it is a best practice, to explicitly declare the dependency to it.
-
 ## Installation
+
+
+### NOTE: Dependency: declarative-controllers
+This application component requires `declarative-controllers` as another dependency you have to add to your application.
+
+The reason is, that you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
+This superclass is part of the app-component: [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers).
+
+Technically it is not strictly required to directly add the dependency to `declarative-controllers`, since `attachable` already has a dependency on it.
+
+However: since you directly depend on the app component (with extending your classes from `AnnotatableAbstractLookup`), 
+it is a best practice to explicitly declare the dependency to it.
+
+
 
 1. Add the following maven repository `https://dl.bintray.com/mariodavid/cuba-components` to the build.gradle of your CUBA application:
 
@@ -85,6 +91,7 @@ However: since you directly depend on the app component (since you have to exten
         
         // ...
     }
+
 
 2. Select a version of the add-on which is compatible with the platform version used in your project:
 
