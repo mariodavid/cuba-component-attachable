@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface HasAttachments {
+public @interface WithAttachments {
     String listComponent() default "";
     String buttonId() default "attachmentsBtn";
     String buttonsPanel() default "buttonsPanel";

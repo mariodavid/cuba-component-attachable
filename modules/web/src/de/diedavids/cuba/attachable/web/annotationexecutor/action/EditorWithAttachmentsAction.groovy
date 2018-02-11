@@ -6,23 +6,23 @@ import com.haulmont.cuba.gui.components.AbstractAction
 import com.haulmont.cuba.gui.components.Action
 import com.haulmont.cuba.gui.components.Component
 import com.haulmont.cuba.gui.components.Window
-import de.diedavids.cuba.attachable.web.annotationexecutor.HasAttachmentsBean
+import de.diedavids.cuba.attachable.web.annotationexecutor.WithAttachmentsBean
 import groovy.transform.CompileStatic
 
 @CompileStatic
-class EditorHasAttachmentsAction extends AbstractAction implements Action.HasOpenType {
+class EditorWithAttachmentsAction extends AbstractAction implements Action.HasOpenType {
 
-    HasAttachmentsBean hasAttachmentsBean = AppBeans.<HasAttachmentsBean> get(HasAttachmentsBean)
+    WithAttachmentsBean hasAttachmentsBean = AppBeans.<WithAttachmentsBean> get(WithAttachmentsBean)
 
     WindowManager.OpenType openType
 
     protected Window.Editor editor
 
-    EditorHasAttachmentsAction(Window.Editor editor) {
-        this(HasAttachmentsBean.ACTION_ID, editor)
+    EditorWithAttachmentsAction(Window.Editor editor) {
+        this(WithAttachmentsBean.ACTION_ID, editor)
     }
 
-    EditorHasAttachmentsAction(String id, Window.Editor editor) {
+    EditorWithAttachmentsAction(String id, Window.Editor editor) {
         super(id)
         this.editor = editor
 

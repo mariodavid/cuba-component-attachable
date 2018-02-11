@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component
 
 import javax.inject.Inject
 
-@Component(HasAttachmentsBean.NAME)
+@Component(WithAttachmentsBean.NAME)
 @CompileStatic
-class HasAttachmentsBean {
+class WithAttachmentsBean {
 
     public static final String NAME = 'ddca$AttachableBean'
 

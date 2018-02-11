@@ -6,21 +6,21 @@ import com.haulmont.cuba.gui.components.Action
 import com.haulmont.cuba.gui.components.Component
 import com.haulmont.cuba.gui.components.ListComponent
 import com.haulmont.cuba.gui.components.actions.ItemTrackingAction
-import de.diedavids.cuba.attachable.web.annotationexecutor.HasAttachmentsBean
+import de.diedavids.cuba.attachable.web.annotationexecutor.WithAttachmentsBean
 import groovy.transform.CompileStatic
 
 @CompileStatic
-class TableHasAttachmentsAction extends ItemTrackingAction implements Action.HasOpenType {
+class TableWithAttachmentsAction extends ItemTrackingAction implements Action.HasOpenType {
 
-    HasAttachmentsBean hasAttachmentsBean = AppBeans.<HasAttachmentsBean> get(HasAttachmentsBean)
+    WithAttachmentsBean hasAttachmentsBean = AppBeans.<WithAttachmentsBean> get(WithAttachmentsBean)
 
     WindowManager.OpenType openType
 
-    TableHasAttachmentsAction(ListComponent target) {
-        this(HasAttachmentsBean.ACTION_ID, target)
+    TableWithAttachmentsAction(ListComponent target) {
+        this(WithAttachmentsBean.ACTION_ID, target)
     }
 
-    TableHasAttachmentsAction(String id, ListComponent target) {
+    TableWithAttachmentsAction(String id, ListComponent target) {
         super(target, id)
 
         updateCaption()

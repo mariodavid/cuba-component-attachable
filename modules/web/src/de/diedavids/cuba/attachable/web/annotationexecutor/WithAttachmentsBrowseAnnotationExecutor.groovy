@@ -6,8 +6,8 @@ import com.haulmont.cuba.gui.components.ListComponent
 import com.haulmont.cuba.gui.components.Window
 import de.balvi.cuba.declarativecontrollers.web.annotationexecutor.browse.BrowseAnnotationExecutor
 import de.balvi.cuba.declarativecontrollers.web.helper.ButtonsPanelHelper
-import de.diedavids.cuba.attachable.web.HasAttachments
-import de.diedavids.cuba.attachable.web.annotationexecutor.action.TableHasAttachmentsAction
+import de.diedavids.cuba.attachable.web.WithAttachments
+import de.diedavids.cuba.attachable.web.annotationexecutor.action.TableWithAttachmentsAction
 import groovy.transform.CompileStatic
 import org.springframework.stereotype.Component
 
@@ -16,7 +16,7 @@ import java.lang.annotation.Annotation
 
 @CompileStatic
 @Component('ddca$HasAttachmentsBrowseAnnotationExecutor')
-class HasAttachmentsBrowseAnnotationExecutor implements BrowseAnnotationExecutor<HasAttachments> {
+class WithAttachmentsBrowseAnnotationExecutor implements BrowseAnnotationExecutor<WithAttachments> {
 
     static final List<String> PRE_BUTTONS = [
             'createBtn',
@@ -33,13 +33,13 @@ class HasAttachmentsBrowseAnnotationExecutor implements BrowseAnnotationExecutor
 
     @SuppressWarnings('Instanceof')
     boolean supports(Annotation annotation) {
-        annotation instanceof HasAttachments
+        annotation instanceof WithAttachments
     }
 
     @Override
-    void init(HasAttachments annotation, Window.Lookup browse, Map<String, Object> params) {
+    void init(WithAttachments annotation, Window.Lookup browse, Map<String, Object> params) {
         ListComponent listComponent = browse.getComponent(annotation.listComponent()) as ListComponent
-        def action = new TableHasAttachmentsAction(listComponent)
+        def action = new TableWithAttachmentsAction(listComponent)
         listComponent.addAction(action)
         if (annotation.buttonsPanel()) {
             ButtonsPanel buttonsPanel = browse.getComponent(annotation.buttonsPanel()) as ButtonsPanel
@@ -49,7 +49,7 @@ class HasAttachmentsBrowseAnnotationExecutor implements BrowseAnnotationExecutor
     }
 
     @Override
-    void ready(HasAttachments annotation, Window.Lookup browse, Map<String, Object> params) {
+    void ready(WithAttachments annotation, Window.Lookup browse, Map<String, Object> params) {
 
     }
 }
