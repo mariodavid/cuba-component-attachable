@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.8.0'
+    ext.cubaVersion = '6.9.2'
     repositories {
         
         mavenLocal()
@@ -25,6 +25,8 @@ buildscript {
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
 
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
+
         classpath 'net.saliman:gradle-cobertura-plugin:2.5.0'
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2"
     }
@@ -41,44 +43,74 @@ def coreModule = project(":${modulePrefix}-core")
 def guiModule = project(":${modulePrefix}-gui")
 def webModule = project(":${modulePrefix}-web")
 
-def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
+def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
 
 apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 
-def bintrayRepositoryUrl = "https://api.bintray.com/maven/mariodavid/cuba-components/cuba-component-attachable/;publish=1"
 
 
 cuba {
     artifact {
         group = 'de.diedavids.cuba.attachable'
-        version = "0.1.0"
+        version = "0.2.0"
         isSnapshot = false
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
-    }
-    uploadRepository {
-        if (cuba.artifact.isSnapshot) {
-            url = System.properties['uploadRepositorySnapshot'] ?: System.env.UPLOAD_REPOSITORY_SNAPSHOT
-        } else {
-            url = System.properties['uploadRepositoryRelease'] ?: System.env.UPLOAD_REPOSITORY_RELEASE ?: bintrayRepositoryUrl
-        }
-
-        user = System.properties['uploadRepositoryUsername'] ?: System.env.UPLOAD_REPOSITORY_USERNAME
-        password = System.properties['uploadRepositoryPassword'] ?:System.env.UPLOAD_REPOSITORY_PASSWORD
     }
     ide {
         vcs = 'Git'
     }
 }
 
+
+subprojects {
+    apply plugin: 'com.jfrog.bintray'
+
+    bintray {
+        user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('UPLOAD_REPOSITORY_USERNAME')
+        key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('UPLOAD_REPOSITORY_PASSWORD')
+
+        configurations = ['archives']
+
+        publish = true
+
+        override = false
+
+        // metadata
+        pkg {
+            repo = 'cuba-components'
+            name = 'cuba-component-attachable'
+            desc = 'CUBA component that lets you add attachments to any entity'
+            userOrg = 'mariodavid'
+
+            websiteUrl = 'https://github.com/mariodavid/cuba-component-attachable'
+            issueTrackerUrl = 'https://github.com/mariodavid/cuba-component-attachable/issues'
+            vcsUrl = 'https://github.com/mariodavid/cuba-component-attachable.git'
+
+            licenses = ["Apache-2.0"]
+
+            labels = ['attachable', 'file attachments', 'cuba-patform', 'cuba-component']
+            githubRepo = 'mariodavid/cuba-component-attachable'
+            githubReleaseNotesFile = 'CHANGELOG.md'
+
+            version {
+                name = "${cuba.artifact.version}"
+                desc = ''
+                released = new Date()
+                vcsTag = "${cuba.artifact.version}"
+            }
+        }
+    }
+}
+
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.4.0")
-    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.2.0")
+    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.6.0")
+    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.3.0")
 
 }
 
