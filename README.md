@@ -13,6 +13,44 @@ Just add `@WithAttachments` on the browse screen of your entity and the rest wil
 ![1-browse-with-attachments](https://github.com/mariodavid/cuba-component-attachable/blob/master/img/1-browse-with-attachments.png)
 
 
+
+## Installation
+
+
+
+1. `attachable` is available in the [CUBA marketplace](https://www.cuba-platform.com/marketplace)
+2. Select a version of the add-on which is compatible with the platform version used in your project:
+
+| Platform Version | declarative-controllers | Add-on Version |
+| ---------------- | -------------- | -------------- |
+| 6.9.x            | 0.6.x          | 0.2.x          |
+| 6.8.x            | 0.4.x          | 0.1.x          |
+
+
+The latest version is: [ ![Download](https://api.bintray.com/packages/mariodavid/cuba-components/cuba-component-attachable/images/download.svg) ](https://bintray.com/mariodavid/cuba-components/cuba-component-attachable/_latestVersion)
+
+Add custom application component to your project:
+
+* Artifact group: `de.diedavids.cuba.attachable`
+* Artifact name: `attachable-global`
+* Version: *add-on version*
+
+3. install the compatible version of [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers) as another dependecy (see Table from 2. for version compatability).
+
+
+### NOTE: Dependency: declarative-controllers
+This application component requires `declarative-controllers` as another dependency you have to add to your application.
+
+The reason is, that you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
+This superclass is part of the app-component: [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers).
+
+Technically it is not strictly required to directly add the dependency to `declarative-controllers`, since `attachable` already has a dependency on it.
+
+However: since you directly depend on the app component (with extending your classes from `AnnotatableAbstractLookup`), 
+it is a best practice to explicitly declare the dependency to it.
+
+
+
 ## Usage
 
 To add attachments to your entity, you have to add the following annotation to your browse / edit screen controller:
@@ -57,57 +95,3 @@ The ability to do the preview depends on the attachment type and the browser cap
 The application components adds the following application properties, that can be changed in the corresponding screen (`Administration > Application Properties):
 
 * `attachable.updateAttachmentCounterOnSelect` - whether or not a counter of attachments should be displayed after a particular entity is selected in the table
-
-## Installation
-
-
-### NOTE: Dependency: declarative-controllers
-This application component requires `declarative-controllers` as another dependency you have to add to your application.
-
-The reason is, that you need to extend your screen from `AnnotatableAbstractLookup` instead of `AbstractLookup`.
-This superclass is part of the app-component: [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers).
-
-Technically it is not strictly required to directly add the dependency to `declarative-controllers`, since `attachable` already has a dependency on it.
-
-However: since you directly depend on the app component (with extending your classes from `AnnotatableAbstractLookup`), 
-it is a best practice to explicitly declare the dependency to it.
-
-
-
-1. Add the following maven repository `https://dl.bintray.com/mariodavid/cuba-components` to the build.gradle of your CUBA application:
-
-
-    buildscript {
-        
-        //...
-        
-        repositories {
-        
-            // ...
-        
-            maven {
-                url  "https://dl.bintray.com/mariodavid/cuba-components"
-            }
-        }
-        
-        // ...
-    }
-
-
-2. Select a version of the add-on which is compatible with the platform version used in your project:
-
-| Platform Version | declarative-controllers | Add-on Version |
-| ---------------- | -------------- | -------------- |
-| 6.8.x            | 0.4.x          | 0.1.x          |
-
-
-The latest version is: [ ![Download](https://api.bintray.com/packages/mariodavid/cuba-components/cuba-component-attachable/images/download.svg) ](https://bintray.com/mariodavid/cuba-components/cuba-component-attachable/_latestVersion)
-
-Add custom application component to your project:
-
-* Artifact group: `de.diedavids.cuba.attachable`
-* Artifact name: `attachable-global`
-* Version: *add-on version*
-
-3. install the compatible version of [cuba-component-declarative-controllers](https://github.com/balvi/cuba-component-declarative-controllers) as another dependecy (see Table from 2. for version compatability).
-
