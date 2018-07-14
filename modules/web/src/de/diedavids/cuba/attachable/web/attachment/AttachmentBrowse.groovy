@@ -7,12 +7,15 @@ import com.haulmont.cuba.gui.components.AbstractLookup
 import com.haulmont.cuba.gui.components.Table
 import com.haulmont.cuba.gui.components.actions.CreateAction
 import com.haulmont.cuba.gui.data.CollectionDatasource
+import de.balvi.cuba.declarativecontrollers.web.browse.AnnotatableAbstractLookup
 import de.diedavids.cuba.attachable.entity.Attachment
+import de.diedavids.cuba.taggable.web.WithTags
 
 import javax.inject.Inject
 import javax.inject.Named
 
-class AttachmentBrowse extends AbstractLookup {
+@WithTags(listComponent = "attachmentsTable", showTagsInList = true, showTagsAsLink = true, tagLinkOpenType = "NEW_TAB")
+class AttachmentBrowse extends AnnotatableAbstractLookup {
 
     @WindowParam
     Entity entity
@@ -28,6 +31,7 @@ class AttachmentBrowse extends AbstractLookup {
 
     @Override
     void init(Map<String, Object> params) {
+        super.init(params)
         initCreateAction()
         initDownloadAction()
         initAttachmentDs()

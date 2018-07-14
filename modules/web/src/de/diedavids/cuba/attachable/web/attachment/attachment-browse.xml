@@ -11,8 +11,8 @@
                          datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource">
         </collectionDatasource>
     </dsContext>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="768"
+                width="1024"/>
     <layout expand="attachmentsTable"
             spacing="true">
         <table id="attachmentsTable"
