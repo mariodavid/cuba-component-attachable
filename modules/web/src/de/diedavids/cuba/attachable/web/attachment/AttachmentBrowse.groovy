@@ -3,7 +3,6 @@ package de.diedavids.cuba.attachable.web.attachment
 import com.haulmont.cuba.core.entity.Entity
 import com.haulmont.cuba.gui.WindowManager
 import com.haulmont.cuba.gui.WindowParam
-import com.haulmont.cuba.gui.components.AbstractLookup
 import com.haulmont.cuba.gui.components.Table
 import com.haulmont.cuba.gui.components.actions.CreateAction
 import com.haulmont.cuba.gui.data.CollectionDatasource
@@ -14,7 +13,7 @@ import de.diedavids.cuba.taggable.web.WithTags
 import javax.inject.Inject
 import javax.inject.Named
 
-@WithTags(listComponent = "attachmentsTable", showTagsInList = true, showTagsAsLink = true, tagLinkOpenType = "NEW_TAB")
+@WithTags(listComponent = 'attachmentsTable', showTagsInList = true, showTagsAsLink = true, tagLinkOpenType = 'NEW_TAB')
 class AttachmentBrowse extends AnnotatableAbstractLookup {
 
     @WindowParam
