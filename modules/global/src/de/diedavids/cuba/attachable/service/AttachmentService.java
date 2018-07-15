@@ -13,5 +13,5 @@ public interface AttachmentService {
     int countAttachments(Entity entity);
     Collection<Attachment> getAttachments(Entity entity);
 
-    void createAttachments(Entity entity, Collection<FileDescriptor> files);
+    void storeAttachmentsFor(Entity entity, Collection<FileDescriptor> files);
 }

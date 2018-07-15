@@ -1,12 +1,9 @@
 package de.diedavids.cuba.attachable.web.attachment
 
 import com.haulmont.cuba.core.entity.Entity
-import com.haulmont.cuba.core.entity.FileDescriptor
 import com.haulmont.cuba.gui.WindowManager
 import com.haulmont.cuba.gui.WindowParam
 import com.haulmont.cuba.gui.app.core.file.MultiUploader
-import com.haulmont.cuba.gui.components.AbstractWindow
-import com.haulmont.cuba.gui.components.Frame
 import com.haulmont.cuba.gui.components.Table
 import com.haulmont.cuba.gui.components.Window
 import com.haulmont.cuba.gui.components.actions.CreateAction
@@ -70,12 +67,12 @@ class AttachmentBrowse extends AnnotatableAbstractLookup {
     }
 
     void multiupload() {
-        MultiUploader multiUploadDialog = openWindow("multiuploadDialog", WindowManager.OpenType.DIALOG) as MultiUploader
+        MultiUploader multiUploadDialog = openWindow('multiuploadDialog', WindowManager.OpenType.DIALOG) as MultiUploader
         multiUploadDialog.addCloseWithCommitListener(new Window.CloseWithCommitListener() {
             @Override
             void windowClosedWithCommitAction() {
                 def filesToCreateAttachmentsFor = multiUploadDialog.files
-                attachmentService.createAttachments(entity, filesToCreateAttachmentsFor)
+                attachmentService.storeAttachmentsFor(entity, filesToCreateAttachmentsFor)
                 attachmentsDs.refresh()
             }
         })

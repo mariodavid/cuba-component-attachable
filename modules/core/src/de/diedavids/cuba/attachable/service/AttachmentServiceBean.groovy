@@ -41,7 +41,7 @@ class AttachmentServiceBean implements AttachmentService {
     }
 
     @Override
-    void createAttachments(Entity entity, Collection<FileDescriptor> files) {
+    void storeAttachmentsFor(Entity entity, Collection<FileDescriptor> files) {
 
         CommitContext commitContext = new CommitContext()
 
