@@ -56,7 +56,7 @@ cuba {
     artifact {
         group = 'de.diedavids.cuba.attachable'
         version = "0.3.0"
-        isSnapshot = true
+        isSnapshot = false
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
