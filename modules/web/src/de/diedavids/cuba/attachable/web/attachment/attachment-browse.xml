@@ -21,6 +21,11 @@
                columnControlVisible="false"
                     width="100%">
             <actions>
+                <action id="multiupload"
+                        icon="UPLOAD"
+                        caption="msg://multiupload"
+                        invoke="multiupload"
+                />
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
@@ -37,6 +42,8 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
+                <button id="multiuploadBtn"
+                        action="attachmentsTable.multiupload"/>
                 <button id="createBtn"
                         action="attachmentsTable.create"/>
                 <button id="editBtn"
