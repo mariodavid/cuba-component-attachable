@@ -47,6 +47,13 @@ However: since you directly depend on the app component (with extending your cla
 it is a best practice to explicitly declare the dependency to it.
 
 
+## Supported DBMS
+
+The following databases are supported by this application component:
+
+* HSQLDB
+* PostgreSQL
+
 
 ## Usage
 
