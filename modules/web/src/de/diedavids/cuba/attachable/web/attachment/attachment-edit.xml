@@ -9,6 +9,11 @@
         <datasource id="attachmentDs"
                     class="de.diedavids.cuba.attachable.entity.Attachment"
                     view="attachment-view"/>
+        <collectionDatasource id="categoriesDs"
+                              class="de.diedavids.cuba.attachable.entity.AttachmentCategory"
+                              view="_minimal">
+            <![CDATA[select e from ddca$AttachmentCategory e]]>
+        </collectionDatasource>
     </dsContext>
     <layout expand="windowActions"
             spacing="true">
@@ -17,6 +22,8 @@
             <column width="400px">
                 <field property="name"/>
                 <field property="file"/>
+                <field optionsDatasource="categoriesDs"
+                       property="category"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"

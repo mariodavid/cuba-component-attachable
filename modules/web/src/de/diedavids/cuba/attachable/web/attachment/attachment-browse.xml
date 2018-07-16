@@ -7,8 +7,8 @@
         messagesPack="de.diedavids.cuba.attachable.web.attachment">
     <dsContext>
         <collectionDatasource id="attachmentsDs"
-                         class="de.diedavids.cuba.attachable.entity.Attachment"
-                         datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource">
+                              class="de.diedavids.cuba.attachable.entity.Attachment"
+                              datasourceClass="de.diedavids.cuba.attachable.web.attachment.AttachmentBrowseDatasource">
         </collectionDatasource>
     </dsContext>
     <dialogMode height="768"
@@ -16,27 +16,26 @@
     <layout expand="attachmentsTable"
             spacing="true">
         <table id="attachmentsTable"
+               columnControlVisible="false"
                presentations="false"
                settingsEnabled="false"
-               columnControlVisible="false"
-                    width="100%">
+               width="100%">
             <actions>
                 <action id="multiupload"
-                        icon="UPLOAD"
                         caption="msg://multiupload"
-                        invoke="multiupload"
-                />
+                        icon="UPLOAD"
+                        invoke="multiupload"/>
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
             </actions>
             <columns>
-                <column id="name" />
+                <column id="name"/>
                 <column id="file"
                         link="true"
-                        linkInvoke="previewFile"
-                />
-                <column id="createTs" />
+                        linkInvoke="previewFile"/>
+                <column id="createTs"/>
+                <column id="category"/>
             </columns>
             <rows datasource="attachmentsDs"/>
             <rowsCount/>
