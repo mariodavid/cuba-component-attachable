@@ -10,6 +10,7 @@ create table DDCA_ATTACHEMENT (
     DELETED_BY varchar(50),
     --
     NAME varchar(255) not null,
+    ATTACHABLE varchar(255) not null,
     FILE_ID uuid,
     CATEGORY_ID uuid,
     --
