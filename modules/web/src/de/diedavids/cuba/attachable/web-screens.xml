@@ -7,4 +7,10 @@
             template="de/diedavids/cuba/attachable/web/attachment/attachment-edit.xml"/>
     <screen id="ddca$Attachment.preview"
             template="de/diedavids/cuba/attachable/web/attachment/attachment-preview.xml"/>
+    <screen id="ddca$AttachmentCategory.browse"
+            template="de/diedavids/cuba/attachable/web/attachmentcategory/attachment-category-browse.xml"/>
+    <screen id="ddca$AttachmentCategory.edit"
+            template="de/diedavids/cuba/attachable/web/attachmentcategory/attachment-category-edit.xml"/>
+    <screen id="ddca$Attachment.all-browse"
+            template="de/diedavids/cuba/attachable/web/attachment/attachment-all-browse.xml"/>
 </screen-config>

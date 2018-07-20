@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import com.haulmont.chile.core.annotations.NamePattern;
 import de.diedavids.cuba.entitysoftreference.EntitySoftReferenceConverter;
 import de.diedavids.cuba.entitysoftreference.EntitySoftReferenceDatatype;
+import com.haulmont.cuba.core.entity.annotation.Lookup;
+import com.haulmont.cuba.core.entity.annotation.LookupType;
 
 @NamePattern("%s|name")
 @Table(name = "DDCA_ATTACHEMENT", indexes = {
@@ -42,6 +44,20 @@ public class Attachment extends StandardEntity {
     @JoinColumn(name = "FILE_ID")
     protected FileDescriptor file;
 
+    @Lookup(type = LookupType.DROPDOWN, actions = {"lookup"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
+    protected AttachmentCategory category;
+
+    public void setCategory(AttachmentCategory category) {
+        this.category = category;
+    }
+
+    public AttachmentCategory getCategory() {
+        return category;
+    }
+
+
     public com.haulmont.cuba.core.entity.Entity getAttachable() {
         return attachable;
     }
@@ -49,6 +65,7 @@ public class Attachment extends StandardEntity {
     public void setAttachable(com.haulmont.cuba.core.entity.Entity attachable) {
         this.attachable = attachable;
     }
+
 
 
 

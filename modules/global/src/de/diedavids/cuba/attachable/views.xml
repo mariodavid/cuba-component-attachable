@@ -5,5 +5,7 @@
           name="attachment-view">
         <property name="file"
                   view="_minimal"/>
+        <property name="category"
+                  view="_minimal"/>
     </view>
 </views>

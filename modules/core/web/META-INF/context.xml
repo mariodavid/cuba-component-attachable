@@ -18,6 +18,6 @@
           name="jdbc/CubaDS"
           password="postgres"
           type="javax.sql.DataSource"
-          url="jdbc:postgresql://localhost/postgres"
+          url="jdbc:postgresql://localhost/attachable"
           username="postgres"/>-->
 </Context>
