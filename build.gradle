@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.9.3'
+    ext.cubaVersion = '6.10.4'
     repositories {
         
         mavenLocal()
@@ -55,8 +55,8 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'de.diedavids.cuba.attachable'
-        version = "0.4.2"
-        isSnapshot = false
+        version = "0.5.0"
+        isSnapshot = true
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
@@ -109,9 +109,9 @@ subprojects {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.6.0")
-    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.3.2")
-    appComponent("de.diedavids.cuba.taggable:taggable-global:0.2.3")
+    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.7.0")
+    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.4.0")
+    appComponent("de.diedavids.cuba.taggable:taggable-global:0.3.0")
 
 }
 
@@ -211,7 +211,9 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 }
 
 configure(globalModule) {
-    task enhance(type: CubaEnhancing)
+    entitiesEnhancing {
+        main { enabled = true }
+    }
 
     jar {
         manifest {
