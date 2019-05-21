@@ -23,6 +23,10 @@ buildscript {
 }
 
 
+plugins {
+    id 'net.researchgate.release' version '2.6.0'
+}
+
 apply plugin: "com.github.kt3k.coveralls"
 
 
@@ -39,14 +43,11 @@ def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
-
-
-
 cuba {
     artifact {
-        group = 'de.diedavids.cuba.attachable'
-        version = "0.5.0"
-        isSnapshot = false
+        group = 'de.diedavids.cuba.taggable'
+        version = project.properties['version'].replaceAll('-SNAPSHOT', '')
+        isSnapshot = project.properties['version'].contains('-SNAPSHOT')
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
@@ -114,11 +115,11 @@ allprojects {
 
 
 def files = subprojects
-        .findAll{ !it.name.toLowerCase().contains('theme') }
-        .collect { new File(it.projectDir, '/build/cobertura/cobertura.ser')}
+        .findAll { !it.name.toLowerCase().contains('theme') }
+        .collect { new File(it.projectDir, '/build/cobertura/cobertura.ser') }
 def sourceDirs = subprojects
-        .findAll{ !it.name.toLowerCase().contains('theme') }
-        .collect { new File(it.projectDir, '/src')}
+        .findAll { !it.name.toLowerCase().contains('theme') }
+        .collect { new File(it.projectDir, '/src') }
 
 cobertura {
     coverageFormats = ['html', 'xml']
@@ -140,9 +141,9 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 
     dependencies {
         testCompile('junit:junit:4.12')
+        testCompile 'org.assertj:assertj-core:2.9.0'
 
-
-        testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
+        testCompile('org.spockframework:spock-core:1.2-groovy-2.4')
         testCompile('org.springframework:spring-test:4.3.1.RELEASE')
         testRuntime "cglib:cglib-nodep:3.2.4"
     }
@@ -159,10 +160,8 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'groovy')
-
     apply plugin: 'net.saliman.cobertura'
     apply plugin: 'codenarc'
-
 
     codenarc {
         toolVersion = "0.24"
@@ -186,8 +185,7 @@ configure([globalModule, coreModule, guiModule, webModule]) {
         coverageReportDir = new File("$buildDir/reports/cobertura")
 
         coverageExcludes = [
-                '.*Generator',
-                '.*Enum'
+                '.*Enum',
         ]
     }
 
@@ -198,11 +196,21 @@ configure([globalModule, coreModule, guiModule, webModule]) {
         main { groovy { srcDirs = ["src"] } }
         test { groovy { srcDirs = ["test"] } }
     }
+
+    sourceSets.main.output.classesDir = new File(project.buildDir, "classes/main")
+    sourceSets.test.output.classesDir = new File(project.buildDir, "classes/test")
+
 }
 
 configure(globalModule) {
     entitiesEnhancing {
-        main { enabled = true }
+        main {
+            enabled = true
+        }
+         test {
+            enabled = true
+            //persistenceConfig = 'attachable-test-persistence.xml'
+        }
     }
 
     jar {
@@ -211,11 +219,18 @@ configure(globalModule) {
             attributes('App-Component-Version': cuba.artifact.version + (cuba.artifact.isSnapshot ? '-SNAPSHOT' : ''))
         }
     }
-
-    
 }
 
 configure(coreModule) {
+
+    entitiesEnhancing {
+        main { enabled = true }
+        test {
+            enabled = true
+            //persistenceConfig = 'attachable-test-persistence.xml'
+        }
+
+    }
 
     configurations {
         jdbc
@@ -227,7 +242,6 @@ configure(coreModule) {
         provided(servletApi)
         jdbc(hsql)
         testRuntime(hsql)
-
     }
 
     task cleanConf(description: 'Cleans up conf directory') {
@@ -325,10 +339,6 @@ configure(webModule) {
     }
 }
 
-
-
-
-
 task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
     delete("$cuba.tomcat.dir/shared")
     delete("$cuba.tomcat.dir/webapps/${modulePrefix}-core")
@@ -349,8 +359,6 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
-
-apply from: 'extra.gradle'
 
 
 clean {

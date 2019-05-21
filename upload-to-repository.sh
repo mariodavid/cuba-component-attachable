@@ -2,3 +2,4 @@
 
 
 ./gradlew clean assemble bintrayUpload
+
