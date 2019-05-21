@@ -45,7 +45,7 @@ apply(plugin: 'cuba')
 
 cuba {
     artifact {
-        group = 'de.diedavids.cuba.taggable'
+        group = 'de.diedavids.cuba.attachable'
         version = project.properties['version'].replaceAll('-SNAPSHOT', '')
         isSnapshot = project.properties['version'].contains('-SNAPSHOT')
     }
