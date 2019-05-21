@@ -20,8 +20,8 @@ Just add `@WithAttachments` on the browse screen of your entity and the rest wil
 
 | Platform Version | Add-on Version |
 | ---------------- | -------------- |
-| 6.10.x           | 0.4.x          |
-| 6.9.x            | 0.2.x - 0.3.x  |
+| 6.10.x           | 0.5.x          |
+| 6.9.x            | 0.2.x - 0.4.x  |
 | 6.8.x            | 0.1.x          |
 
 
