@@ -1,5 +1,6 @@
 package de.diedavids.cuba.attachable.web.annotationexecutor
 
+import com.haulmont.cuba.gui.WindowManager
 import com.haulmont.cuba.gui.components.Button
 import com.haulmont.cuba.gui.components.ButtonsPanel
 import com.haulmont.cuba.gui.components.ListComponent
@@ -39,7 +40,10 @@ class WithAttachmentsBrowseAnnotationExecutor implements BrowseAnnotationExecuto
     @Override
     void init(WithAttachments annotation, Window.Lookup browse, Map<String, Object> params) {
         ListComponent listComponent = browse.getComponent(annotation.listComponent()) as ListComponent
-        def action = new TableWithAttachmentsAction(listComponent)
+        def action = new TableWithAttachmentsAction(
+                listComponent,
+                WindowManager.OpenType.valueOf(annotation.openType())
+        )
         listComponent.addAction(action)
         if (annotation.buttonsPanel()) {
             ButtonsPanel buttonsPanel = browse.getComponent(annotation.buttonsPanel()) as ButtonsPanel

@@ -1,5 +1,7 @@
 package de.diedavids.cuba.attachable.web.attachment
 
+import com.haulmont.cuba.core.global.AppBeans
+import com.haulmont.cuba.core.global.Messages
 import com.haulmont.cuba.gui.AppConfig
 import com.haulmont.cuba.gui.components.Component
 import com.haulmont.cuba.gui.components.actions.ItemTrackingAction
@@ -8,6 +10,8 @@ import de.diedavids.cuba.attachable.entity.Attachment
 class AttachmentDownloadAction extends ItemTrackingAction {
 
     public static final String ACTION_ID = 'download'
+
+    Messages messages = AppBeans.get(Messages.NAME)
 
     AttachmentDownloadAction() {
         super(ACTION_ID)
