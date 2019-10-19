@@ -20,6 +20,7 @@ Just add `@WithAttachments` on the browse screen of your entity and the rest wil
 
 | Platform Version | Add-on Version |
 | ---------------- | -------------- |
+| 7.0.x            | 0.6.x          |
 | 6.10.x           | 0.5.x          |
 | 6.9.x            | 0.2.x - 0.4.x  |
 | 6.8.x            | 0.1.x          |
@@ -42,15 +43,19 @@ The following databases are supported by this application component:
 * PostgreSQL
 
 
-## Usage
+## Using the application component
 
-To add attachments to your entity, you have to add the following annotation to your browse / edit screen controller:
+Annotate your browse screens with the `@WithAttachments` annotation or by implementing the `WithAttachmentsSupport` interface,
+depending on which version of CUBA screen APIs is used in the target screen.
 
-```
-@WithAttachments(listComponent = "customersTable")
-public class CustomerBrowse extends AnnotatableAbstractLookup {
+### @WithAttachments annotation (CUBA 6 screens)
+
+```groovy
+@WithAttachments(listComponent = "productsTable")
+class ProductBrowse extends AnnotatableAbstractLookup {
 }
 ```
+
 
 For the `@WithAttachments` annotation you need to define the list component on which it should add the attachments button.
 Normally this is the `id` of the table you defined in your browse screen.
@@ -62,6 +67,42 @@ The `@WithAttachments` annotations can be customized through the following attri
 * `String listComponent` - the id of the list component / table where the button will be added - REQUIRED
 * `String buttonId` - the id of the newly created button that will be created ("attachmentBtn" by default)
 * `String buttonsPanel` - the id of the buttons panel where the new button will be added ("buttonsPanel" by default)
+
+
+### WithAttachmentsSupport interface (CUBA 7 screens)
+
+```java
+
+public class CustomerBrowse extends StandardLookup<Customer> implements WithAttachmentsSupport {
+
+    @Inject
+    protected GroupTable<Customer> customersTable;
+
+    @Inject
+    protected ButtonsPanel buttonsPanel;
+
+    @Override
+    public ListComponent getListComponentForAttachments() {
+        return customersTable;
+    }
+
+    @Override
+    public ButtonsPanel getButtonsPanelForAttachments() {
+        return buttonsPanel;
+    }
+
+    @Override
+    public WindowManager.OpenType attachmentListOpenType() {
+        return WindowManager.OpenType.NEW_TAB;
+    }
+}
+```
+
+In the Interface variant the following attributes have to be defined by implementing methods instead of annotation attributes:
+
+* `getListComponentForAttachments` defines the list component to target for the attachable functionality
+* `getButtonsPanelForAttachments` defines the button panel on which a button will be placed
+* `attachmentListOpenType` optionally defines the open type for the attachment list
 
 
 ### Example usage

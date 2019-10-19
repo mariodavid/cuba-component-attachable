@@ -1,5 +1,7 @@
 package de.diedavids.cuba.attachable.web.attachment
 
+import com.haulmont.cuba.core.global.AppBeans
+import com.haulmont.cuba.core.global.Messages
 import com.haulmont.cuba.gui.WindowManager
 import com.haulmont.cuba.gui.components.Component
 import com.haulmont.cuba.gui.components.Frame
@@ -11,6 +13,9 @@ class AttachmentPreviewAction extends ItemTrackingAction {
     public static final String ACTION_ID = 'preview'
 
     Frame frame
+
+    Messages messages = AppBeans.get(Messages.NAME)
+
 
     AttachmentPreviewAction() {
         super(ACTION_ID)

@@ -11,4 +11,5 @@ public @interface WithAttachments {
     String listComponent() default "";
     String buttonId() default "attachmentsBtn";
     String buttonsPanel() default "buttonsPanel";
+    String openType() default "DIALOG";
 }

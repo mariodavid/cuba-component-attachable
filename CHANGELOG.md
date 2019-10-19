@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2019-10-19
+
+### Added
+- CUBA 7 screen API support (`WithAttachmentsSupport` interface)
+
+### Dependencies
+- CUBA 7.0.x
+- taggable 0.4.0
+- entity-soft-reference 0.5.1
+- declarative-controllers 0.8.0
+
 ## [0.5.0] - 2019-05-21
 
 ### Dependencies

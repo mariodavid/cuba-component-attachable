@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.10.9'
+    ext.cubaVersion = '7.0.1'
     repositories {
         
         mavenLocal()
@@ -40,7 +40,6 @@ def webModule = project(":${modulePrefix}-web")
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
 
-apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 cuba {
@@ -100,13 +99,13 @@ subprojects {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.7.0")
-    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.4.0")
-    appComponent("de.diedavids.cuba.taggable:taggable-global:0.3.0")
+    appComponent("de.balvi.cuba.declarativecontrollers:declarativecontrollers-global:0.8.0")
+    appComponent("de.diedavids.cuba.entitysoftreference:entity-soft-reference-global:0.5.1")
+    appComponent("de.diedavids.cuba.taggable:taggable-global:0.4.0")
 
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.2.9'
+def hsql = 'org.hsqldb:hsqldb:2.4.1'
 
 
 allprojects {
@@ -136,14 +135,13 @@ cobertura {
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
-    apply(plugin: 'idea')
     apply(plugin: 'cuba')
 
     dependencies {
         testCompile('junit:junit:4.12')
         testCompile 'org.assertj:assertj-core:2.9.0'
 
-        testCompile('org.spockframework:spock-core:1.2-groovy-2.4')
+        testCompile('org.spockframework:spock-core:1.2-groovy-2.5')
         testCompile('org.springframework:spring-test:4.3.1.RELEASE')
         testRuntime "cglib:cglib-nodep:3.2.4"
     }
@@ -164,10 +162,10 @@ configure([globalModule, coreModule, guiModule, webModule]) {
     apply plugin: 'codenarc'
 
     codenarc {
-        toolVersion = "0.24"
+        toolVersion = "1.3"
         ignoreFailures = false
         reportFormat = 'html'
-        reportsDir = new File("./build/reports/codenarc")
+        reportsDir = project.file("build/reports/codenarc")
     }
 
     codenarcMain {
@@ -203,6 +201,12 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 }
 
 configure(globalModule) {
+    dependencies {
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
+    }
     entitiesEnhancing {
         main {
             enabled = true
@@ -239,7 +243,7 @@ configure(coreModule) {
 
     dependencies {
         compile(globalModule)
-        provided(servletApi)
+        compileOnly(servletApi)
         jdbc(hsql)
         testRuntime(hsql)
     }
@@ -260,6 +264,29 @@ configure(coreModule) {
         appJars(modulePrefix + '-global', modulePrefix + '-core')
     }
 
+
+    def hsqlDbName = 'ddca'
+    def hsqlPort = 9010
+
+    task startDb(description: 'Starts local HSQLDB server', type: CubaHsqlStart) {
+        dbPort = hsqlPort
+        dbName = hsqlDbName
+    }
+
+    task stopDb(description: 'Stops local HSQLDB server', type: CubaHsqlStop) {
+        dbPort = hsqlPort
+        dbName = hsqlDbName
+    }
+
+    task removeDb(description: 'Removes local HSQL database', type: Delete) {
+        delete new File("$rootProject.projectDir/data")
+    }
+
+    task killDb(description: "Kill local HSQLDB server process running on port $hsqlPort", type: CubaKillProcess) {
+        port = hsqlPort
+    }
+
+
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
         dbms = 'hsql'
         host = 'localhost'
@@ -274,6 +301,15 @@ configure(coreModule) {
         dbName = 'ddca'
         dbUser = 'sa'
         dbPassword = ''
+    }
+    
+        task createTestDb(dependsOn: assembleDbScripts, description: 'Creates local HSQL database', type: CubaDbCreation) {
+        dbms = 'hsql'
+        host = "localhost:$hsqlPort"
+        dbName = "ddca"
+        dbUser = 'sa'
+        dbPassword = ''
+        auxiliaryScript = file('test/de/diedavids/cuba/attachable/create-db.sql')
     }
 }
 
@@ -296,7 +332,7 @@ configure(webModule) {
     }
 
     dependencies {
-        provided(servletApi)
+        compileOnly(servletApi)
         compile(guiModule)
 
     }
@@ -354,10 +390,6 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
         }
         start.execute()
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
 }
 
 

@@ -16,7 +16,12 @@ import de.diedavids.cuba.taggable.web.WithTags
 import javax.inject.Inject
 import javax.inject.Named
 
-@WithTags(listComponent = 'attachmentsTable', showTagsInList = true, showTagsAsLink = true, tagLinkOpenType = 'NEW_TAB')
+@WithTags(
+        listComponent = 'attachmentsTable',
+        showTagsInList = true,
+        showTagsAsLink = true,
+        tagLinkOpenType = 'NEW_TAB'
+)
 class AttachmentBrowse extends AnnotatableAbstractLookup {
 
     @WindowParam
