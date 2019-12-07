@@ -127,6 +127,6 @@ The ability to do the preview depends on the attachment type and the browser cap
 
 ### Configuration options
 
-The application components adds the following application properties, that can be changed in the corresponding screen (`Administration > Application Properties):
+The application components adds the following application properties, that can be changed in the corresponding screen (`Administration > Application Properties`):
 
 * `attachable.updateAttachmentCounterOnSelect` - whether or not a counter of attachments should be displayed after a particular entity is selected in the table
