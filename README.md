@@ -125,6 +125,8 @@ In order to do display attachments of a particular Entity there is a `fragment` 
 </fragment>
 ```
 
+It is required to pass in the reference to the `attachableDc` of the entity (`customerDc` in the example above).
+
 An example can be found in the [customer-edit.xml](https://github.com/mariodavid/cuba-example-using-attachable/blob/master/modules/web/src/com/company/ceua/web/customer/customer-edit.xml#L53).
 
 ### Example usage
