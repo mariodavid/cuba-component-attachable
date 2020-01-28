@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="attachmentsTable"
+        messagesPack="de.diedavids.cuba.attachable.web.screens.attachment">
+    <data readOnly="true">
+        <collection id="attachmentsDc"
+                    class="de.diedavids.cuba.attachable.entity.Attachment"
+                    view="attachment-view">
+            <loader id="attachmentsDl">
+                <query>
+                    <![CDATA[select e from ddca$Attachment e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="attachmentsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="attachmentsTable"
+                dataLoader="attachmentsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="attachmentsTable"
+                    width="100%"
+                    dataContainer="attachmentsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="file"/>
+                <column id="category"/>
+                <column id="attachable" link="true"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="attachmentsTable.create"/>
+                <button id="editBtn" action="attachmentsTable.edit"/>
+                <button id="removeBtn" action="attachmentsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

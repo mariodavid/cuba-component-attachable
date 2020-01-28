@@ -1,7 +1,7 @@
 package de.diedavids.cuba.attachable.web.attachment
 
 import com.haulmont.cuba.core.entity.FileDescriptor
-import com.haulmont.cuba.gui.data.Datasource
+import com.haulmont.cuba.gui.model.InstanceContainer
 import de.diedavids.cuba.attachable.entity.Attachment
 import spock.lang.Specification
 
@@ -16,10 +16,12 @@ class AttachmentNameExtractorSpec extends Specification {
         def attachment = new Attachment()
         def fileDescriptor = Mock(FileDescriptor)
         fileDescriptor.getName() >> "hello"
-        def event = new Datasource.ItemPropertyChangeEvent(Mock(Datasource), attachment,  "file", null, fileDescriptor)
+        def event = new InstanceContainer.ItemPropertyChangeEvent(
+                Mock(InstanceContainer), attachment,  "file", null, fileDescriptor
+        )
 
         when:
-        sut.itemPropertyChanged(event)
+        sut.accept(event)
 
         then:
         attachment.name == "hello"
@@ -34,10 +36,12 @@ class AttachmentNameExtractorSpec extends Specification {
         def attachment = new Attachment()
         def fileDescriptor = Mock(FileDescriptor)
         fileDescriptor.getName() >> "hello.png"
-        def event = new Datasource.ItemPropertyChangeEvent(Mock(Datasource), attachment,  "file", null, fileDescriptor)
+        def event = new InstanceContainer.ItemPropertyChangeEvent(
+                Mock(InstanceContainer), attachment,  "file", null, fileDescriptor
+        )
 
         when:
-        sut.itemPropertyChanged(event)
+        sut.accept(event)
 
         then:
         attachment.name == "hello"
@@ -53,10 +57,12 @@ class AttachmentNameExtractorSpec extends Specification {
         def attachment = new Attachment(name: "first name")
         def fileDescriptor = Mock(FileDescriptor)
         fileDescriptor.getName() >> "second name.png"
-        def event = new Datasource.ItemPropertyChangeEvent(Mock(Datasource), attachment,  "file", null, fileDescriptor)
+        def event = new InstanceContainer.ItemPropertyChangeEvent(
+                Mock(InstanceContainer), attachment,  "file", null, fileDescriptor
+        )
 
         when:
-        sut.itemPropertyChanged(event)
+        sut.accept(event)
 
         then:
         attachment.name == "first name"

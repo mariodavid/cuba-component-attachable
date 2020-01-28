@@ -2,7 +2,7 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-ddca"
           insertBefore="sys$FileDescriptor.browse">
-        <item screen="ddca$Attachment.all-browse"/>
+        <item screen="ddca$AttachmentAll.browse"/>
         <item screen="ddca$AttachmentCategory.browse"/>
     </menu>
 </menu-config>
