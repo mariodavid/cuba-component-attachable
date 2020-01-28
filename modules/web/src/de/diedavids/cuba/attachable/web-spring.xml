@@ -15,8 +15,4 @@
         </property>
     </bean>
     <gui:screens base-packages="de.diedavids.cuba.attachable.web"/>
-
-    <!--
-    <bean id="dbcdc_ButtonsPanelHelper" class="de.balvi.cuba.declarativecontrollers.web.helper.ButtonsPanelHelperBean" />
-    -->
 </beans>

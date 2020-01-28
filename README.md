@@ -48,10 +48,12 @@ Therefore it is totally possible to use the application component even without d
 
 ## Using the application component
 
+### Browse Screens
+
 Annotate your browse screens with the `@WithAttachments` annotation or by implementing the `WithAttachmentsSupport` interface,
 depending on which version of CUBA screen APIs is used in the target screen.
 
-### @WithAttachments annotation (CUBA 6 screens)
+#### @WithAttachments annotation (CUBA 6 screens)
 
 ```groovy
 @WithAttachments(listComponent = "productsTable")
@@ -72,7 +74,7 @@ The `@WithAttachments` annotations can be customized through the following attri
 * `String buttonsPanel` - the id of the buttons panel where the new button will be added ("buttonsPanel" by default)
 
 
-### WithAttachmentsSupport interface (CUBA 7 screens)
+#### WithAttachmentsSupport interface (CUBA 7 screens)
 
 ```java
 
@@ -107,6 +109,23 @@ In the Interface variant the following attributes have to be defined by implemen
 * `getButtonsPanelForAttachments` defines the button panel on which a button will be placed
 * `attachmentListOpenType` optionally defines the open type for the attachment list
 
+
+
+### Edit Screens (CUBA 7 screens)
+
+Besides using Attachments in the Browse Screen of the Entity, it is also possible to show Attachments as part of an Edit Screen.
+
+In order to do display attachments of a particular Entity there is a `fragment` which can be used in the Edit Screen:
+
+```xml
+<fragment screen="ddca_EntityAttachmentsFragment">
+    <properties>
+        <property name="attachableDc" ref="customerDc"/>
+    </properties>
+</fragment>
+```
+
+An example can be found in the [customer-edit.xml](https://github.com/mariodavid/cuba-example-using-attachable/blob/master/modules/web/src/com/company/ceua/web/customer/customer-edit.xml#L53).
 
 ### Example usage
 To see this application component in action, check out this example: [cuba-example-using-attachable](https://github.com/mariodavid/cuba-example-using-attachable).

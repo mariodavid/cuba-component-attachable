@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fragment xmlns="http://schemas.haulmont.com/cuba/screen/fragment.xsd">
+    <data>
+        <collection id="attachmentsDc"
+                    class="de.diedavids.cuba.attachable.entity.Attachment"
+                    view="attachment-view">
+            <loader id="attachmentsDl">
+                <query>
+                    <![CDATA[select e from ddca$Attachment e where e.attachable = :attachable]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <layout expand="attachmentsTable">
+        <table id="attachmentsTable" dataContainer="attachmentsDc" width="100%" height="200px">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="file"
+                        link="true"/>
+                <column id="category"/>
+            </columns>
+            <buttonsPanel>
+                <button action="attachmentsTable.create"/>
+                <button action="attachmentsTable.edit"/>
+                <button action="attachmentsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</fragment>
