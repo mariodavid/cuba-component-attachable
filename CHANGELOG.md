@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2020-03-26
+
+### Dependencies
+- CUBA 7.2.x
+- taggable 0.6.0
+- entity-soft-reference 0.7.0
+- declarative-controllers 0.10.0
+
 ## [0.8.0] - 2020-01-29
 
 ### Added
