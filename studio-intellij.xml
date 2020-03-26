@@ -4,5 +4,47 @@
     <option name="isOneToOneIndex" value="false" />
     <option name="isNewFkConstraintNaming" value="false" />
     <option name="isJoinedInheritanceDeleteCascade" value="false" />
+    <option name="stateVersion" value="1" />
+    <option name="savedDbProperties">
+      <list>
+        <SavedDbProperties>
+          <option name="databaseName" value="ddca-test" />
+          <option name="dbType" value="hsql" />
+          <option name="host" value="localhost" />
+          <option name="systemPassword" value="" />
+          <option name="systemUser" value="" />
+          <option name="url" value="jdbc:hsqldb:hsql://localhost/ddca-test" />
+          <option name="user" value="sa" />
+          <option name="additionalProperties">
+            <map>
+              <entry key="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+              <entry key="maxIdle" value="2" />
+              <entry key="maxTotal" value="20" />
+              <entry key="maxWaitMillis" value="5000" />
+              <entry key="type" value="javax.sql.DataSource" />
+            </map>
+          </option>
+        </SavedDbProperties>
+        <SavedDbProperties>
+          <option name="databaseName" value="cuba" />
+          <option name="dbType" value="mysql" />
+          <option name="host" value="localhost" />
+          <option name="pass" value="mysql" />
+          <option name="systemPassword" value="" />
+          <option name="systemUser" value="" />
+          <option name="url" value="jdbc:mysql://localhost/cuba?useSSL=false&amp;allowMultiQueries=true&amp;allowPublicKeyRetrieval=true" />
+          <option name="user" value="root" />
+          <option name="additionalProperties">
+            <map>
+              <entry key="driverClassName" value="com.mysql.jdbc.Driver" />
+              <entry key="maxIdle" value="2" />
+              <entry key="maxTotal" value="20" />
+              <entry key="maxWaitMillis" value="5000" />
+              <entry key="type" value="javax.sql.DataSource" />
+            </map>
+          </option>
+        </SavedDbProperties>
+      </list>
+    </option>
   </component>
 </project>
