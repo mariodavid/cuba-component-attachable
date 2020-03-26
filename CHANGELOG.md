@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.9.0] - 2020-03-26
 
+### Added
+- Support for MySQL
+
 ### Dependencies
 - CUBA 7.2.x
 - taggable 0.6.0
